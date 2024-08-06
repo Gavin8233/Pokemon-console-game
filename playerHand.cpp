@@ -1213,64 +1213,7 @@ void playerHand::devModeAddAllCards() {
 
 }
 
-
-
-
-
-
-//==============SHITTY AI===============
-
-static int getBestCardIDX(std::vector<regCard>& currBench) {
-
-	std::vector<int> cardsHealth;
-
-	for (regCard& currCard : currBench) {
-
-		cardsHealth.push_back(currCard.regCardHealth);
-
-	}
-
-	int highestHP = *std::max_element(cardsHealth.begin(), cardsHealth.end());
-	int cardIndexWithHighest = 0;
-
-	for (int i = 0; i < cardsHealth.size(); i++) {
-
-		if (cardsHealth[i] == highestHP) { cardIndexWithHighest = i; break; }
-
-	}
-
-	return cardIndexWithHighest;
-
-}
-
-void playerHand::createAiHand() {
-
-	for (regCard& currCard : playerDeck.playerRegCards) {
-
-		if (currCard.currEvolution == 0) {
-
-			if (playerCurrHand.playerActiveBench.size() == 5) { break; }
-
-			playerCurrHand.playerActiveBench.push_back(currCard);
-
-		}
-
-	}
-
-	int bestIDX = getBestCardIDX(playerCurrHand.playerActiveBench);
-
-	regCard newActive = playerCurrHand.playerActiveBench.at(bestIDX);
-
-	playerCurrHand.activeCard = newActive;
-
-	playerCurrHand.playerActiveBench.erase(playerCurrHand.playerActiveBench.begin() + bestIDX);
-
-}
-
-
-
-
-//==================GOOD AI======================
+//==================AI CHARACTERS======================
 
 regCard activeHand::getRandCard() {
 
